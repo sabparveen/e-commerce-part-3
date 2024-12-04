@@ -13,36 +13,44 @@ import logo from "../assets/signin-g.svg";
 import { Controller, useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Password } from "@mui/icons-material";
 
 // Validation schema
 const SignUpchema = yup.object({
-  firstName: yup.string().required('First name is required'),
-  Password: yup.string().required('Password is required'),
+  firstName: yup.string().required("First name is required"),
+  Password: yup.string().required("Password is required"),
 });
 
 const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const { control, handleSubmit, formState: { errors } } = useForm({
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     defaultValues: {
       firstName: "",
       Password: "",
     },
     resolver: yupResolver(SignUpchema),
   });
- 
-  
-  
+
   return (
-    <>
-      <Box className="container mt-5">
-        <Box className="d-flex justify-content-around align-items-center flex-wrap mt-5">
+    <Box
+      className="vh-100"
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+    >
+      <Box className="container">
+        <Box className="d-flex justify-content-around align-items-center flex-wrap">
           <Box>
             <img src={logo} alt="Logo" />
           </Box>
-          <form onSubmit={handleSubmit((data) => {
-            console.log(data);
-          })}>
+          <form
+            onSubmit={handleSubmit((data) => {
+              console.log(data);
+            })}
+          >
             <Box>
               <Typography variant="h5" className="text-start">
                 Sign in to FreshCart
@@ -67,7 +75,9 @@ const SignIn = () => {
                     />
                   )}
                 />
-                <Typography className="text-danger text-start">{errors?.firstName?.message}</Typography>
+                <Typography className="text-danger text-start">
+                  {errors?.firstName?.message}
+                </Typography>
 
                 <Controller
                   name="Password"
@@ -83,18 +93,35 @@ const SignIn = () => {
                       placeholder="Password"
                       InputProps={{
                         endAdornment: (
-                          <InputAdornment position="end" onClick={() => setShowPassword(!showPassword)} style={{ cursor: 'pointer' }}>
-                            {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                          <InputAdornment
+                            position="end"
+                            onClick={() => setShowPassword(!showPassword)}
+                            style={{ cursor: "pointer" }}
+                          >
+                            {showPassword ? (
+                              <VisibilityIcon />
+                            ) : (
+                              <VisibilityOffIcon />
+                            )}
                           </InputAdornment>
                         ),
                       }}
                     />
                   )}
                 />
-                <Typography className="text-danger text-start">{errors?.Password?.message}</Typography>
+                <Typography className="text-danger text-start">
+                  {errors?.Password?.message}
+                </Typography>
 
                 <Box>
-                  <Button type="submit" size="small" fullWidth variant="contained">Sign In</Button>
+                  <Button
+                    type="submit"
+                    size="small"
+                    fullWidth
+                    variant="contained"
+                  >
+                    Sign In
+                  </Button>
                 </Box>
               </Box>
               <Typography className="mt-3 text-start" variant="body2">
@@ -104,7 +131,7 @@ const SignIn = () => {
           </form>
         </Box>
       </Box>
-    </>
+    </Box>
   );
 };
 
